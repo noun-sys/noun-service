@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.nounsys.nounservice.datasource.account.mapper.EnterpriseVerificationMapper">
+  <resultMap id="BaseResultMap" type="org.nounsys.nounservice.datasource.account.entity.EnterpriseVerification">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="enterprise_id" jdbcType="BIGINT" property="enterpriseId" />
+    <result column="verify_process" jdbcType="VARCHAR" property="verifyProcess" />
+    <result column="enterprise_info_verify_status" jdbcType="VARCHAR" property="enterpriseInfoVerifyStatus" />
+    <result column="bank_account_verify_status" jdbcType="VARCHAR" property="bankAccountVerifyStatus" />
+    <result column="transaction_record_id" jdbcType="BIGINT" property="transactionRecordId" />
+    <result column="transaction_record_history_ids" jdbcType="VARCHAR" property="transactionRecordHistoryIds" />
+    <result column="received_amount" jdbcType="DECIMAL" property="receivedAmount" />
+    <result column="failed_times" jdbcType="INTEGER" property="failedTimes" />
+    <result column="pay_times" jdbcType="INTEGER" property="payTimes" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+    <result column="submitted_at" jdbcType="TIMESTAMP" property="submittedAt" />
+    <result column="reviewed_at" jdbcType="TIMESTAMP" property="reviewedAt" />
+    <result column="reviewed_operator" jdbcType="VARCHAR" property="reviewedOperator" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, enterprise_id, verify_process, enterprise_info_verify_status, bank_account_verify_status, 
+    transaction_record_id, transaction_record_history_ids, received_amount, failed_times, 
+    pay_times, created_at, updated_at, submitted_at, reviewed_at, reviewed_operator
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_enterprise_verification
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_enterprise_verification
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="org.nounsys.nounservice.datasource.account.entity.EnterpriseVerification">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_enterprise_verification (enterprise_id, verify_process, enterprise_info_verify_status, 
+      bank_account_verify_status, transaction_record_id, 
+      transaction_record_history_ids, received_amount, 
+      failed_times, pay_times, created_at, 
+      updated_at, submitted_at, reviewed_at, 
+      reviewed_operator)
+    values (#{enterpriseId,jdbcType=BIGINT}, #{verifyProcess,jdbcType=VARCHAR}, #{enterpriseInfoVerifyStatus,jdbcType=VARCHAR}, 
+      #{bankAccountVerifyStatus,jdbcType=VARCHAR}, #{transactionRecordId,jdbcType=BIGINT}, 
+      #{transactionRecordHistoryIds,jdbcType=VARCHAR}, #{receivedAmount,jdbcType=DECIMAL}, 
+      #{failedTimes,jdbcType=INTEGER}, #{payTimes,jdbcType=INTEGER}, #{createdAt,jdbcType=TIMESTAMP}, 
+      #{updatedAt,jdbcType=TIMESTAMP}, #{submittedAt,jdbcType=TIMESTAMP}, #{reviewedAt,jdbcType=TIMESTAMP}, 
+      #{reviewedOperator,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.nounsys.nounservice.datasource.account.entity.EnterpriseVerification">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_enterprise_verification
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="enterpriseId != null">
+        enterprise_id,
+      </if>
+      <if test="verifyProcess != null">
+        verify_process,
+      </if>
+      <if test="enterpriseInfoVerifyStatus != null">
+        enterprise_info_verify_status,
+      </if>
+      <if test="bankAccountVerifyStatus != null">
+        bank_account_verify_status,
+      </if>
+      <if test="transactionRecordId != null">
+        transaction_record_id,
+      </if>
+      <if test="transactionRecordHistoryIds != null">
+        transaction_record_history_ids,
+      </if>
+      <if test="receivedAmount != null">
+        received_amount,
+      </if>
+      <if test="failedTimes != null">
+        failed_times,
+      </if>
+      <if test="payTimes != null">
+        pay_times,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+      <if test="submittedAt != null">
+        submitted_at,
+      </if>
+      <if test="reviewedAt != null">
+        reviewed_at,
+      </if>
+      <if test="reviewedOperator != null">
+        reviewed_operator,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="enterpriseId != null">
+        #{enterpriseId,jdbcType=BIGINT},
+      </if>
+      <if test="verifyProcess != null">
+        #{verifyProcess,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseInfoVerifyStatus != null">
+        #{enterpriseInfoVerifyStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="bankAccountVerifyStatus != null">
+        #{bankAccountVerifyStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="transactionRecordId != null">
+        #{transactionRecordId,jdbcType=BIGINT},
+      </if>
+      <if test="transactionRecordHistoryIds != null">
+        #{transactionRecordHistoryIds,jdbcType=VARCHAR},
+      </if>
+      <if test="receivedAmount != null">
+        #{receivedAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="failedTimes != null">
+        #{failedTimes,jdbcType=INTEGER},
+      </if>
+      <if test="payTimes != null">
+        #{payTimes,jdbcType=INTEGER},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="submittedAt != null">
+        #{submittedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reviewedAt != null">
+        #{reviewedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reviewedOperator != null">
+        #{reviewedOperator,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.nounsys.nounservice.datasource.account.entity.EnterpriseVerification">
+    update t_enterprise_verification
+    <set>
+      <if test="enterpriseId != null">
+        enterprise_id = #{enterpriseId,jdbcType=BIGINT},
+      </if>
+      <if test="verifyProcess != null">
+        verify_process = #{verifyProcess,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseInfoVerifyStatus != null">
+        enterprise_info_verify_status = #{enterpriseInfoVerifyStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="bankAccountVerifyStatus != null">
+        bank_account_verify_status = #{bankAccountVerifyStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="transactionRecordId != null">
+        transaction_record_id = #{transactionRecordId,jdbcType=BIGINT},
+      </if>
+      <if test="transactionRecordHistoryIds != null">
+        transaction_record_history_ids = #{transactionRecordHistoryIds,jdbcType=VARCHAR},
+      </if>
+      <if test="receivedAmount != null">
+        received_amount = #{receivedAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="failedTimes != null">
+        failed_times = #{failedTimes,jdbcType=INTEGER},
+      </if>
+      <if test="payTimes != null">
+        pay_times = #{payTimes,jdbcType=INTEGER},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="submittedAt != null">
+        submitted_at = #{submittedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reviewedAt != null">
+        reviewed_at = #{reviewedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reviewedOperator != null">
+        reviewed_operator = #{reviewedOperator,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.nounsys.nounservice.datasource.account.entity.EnterpriseVerification">
+    update t_enterprise_verification
+    set enterprise_id = #{enterpriseId,jdbcType=BIGINT},
+      verify_process = #{verifyProcess,jdbcType=VARCHAR},
+      enterprise_info_verify_status = #{enterpriseInfoVerifyStatus,jdbcType=VARCHAR},
+      bank_account_verify_status = #{bankAccountVerifyStatus,jdbcType=VARCHAR},
+      transaction_record_id = #{transactionRecordId,jdbcType=BIGINT},
+      transaction_record_history_ids = #{transactionRecordHistoryIds,jdbcType=VARCHAR},
+      received_amount = #{receivedAmount,jdbcType=DECIMAL},
+      failed_times = #{failedTimes,jdbcType=INTEGER},
+      pay_times = #{payTimes,jdbcType=INTEGER},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      submitted_at = #{submittedAt,jdbcType=TIMESTAMP},
+      reviewed_at = #{reviewedAt,jdbcType=TIMESTAMP},
+      reviewed_operator = #{reviewedOperator,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

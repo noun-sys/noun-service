@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.nounsys.nounservice.datasource.account.mapper.UserInfoMapper">
+  <resultMap id="BaseResultMap" type="org.nounsys.nounservice.datasource.account.entity.UserInfo">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="real_name" jdbcType="VARCHAR" property="realName" />
+    <result column="id_card" jdbcType="VARCHAR" property="idCard" />
+    <result column="bank_card" jdbcType="VARCHAR" property="bankCard" />
+    <result column="reserved_mobile" jdbcType="VARCHAR" property="reservedMobile" />
+    <result column="id_card_front_attachment_id" jdbcType="VARCHAR" property="idCardFrontAttachmentId" />
+    <result column="id_card_back_attachment_id" jdbcType="VARCHAR" property="idCardBackAttachmentId" />
+    <result column="enterprise_id" jdbcType="BIGINT" property="enterpriseId" />
+    <result column="face_verify_score" jdbcType="INTEGER" property="faceVerifyScore" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="identity_info_status" jdbcType="VARCHAR" property="identityInfoStatus" />
+    <result column="three_factor_verify_status" jdbcType="VARCHAR" property="threeFactorVerifyStatus" />
+    <result column="four_factor_verify_status" jdbcType="VARCHAR" property="fourFactorVerifyStatus" />
+    <result column="living_verify_status" jdbcType="VARCHAR" property="livingVerifyStatus" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, real_name, id_card, bank_card, reserved_mobile, id_card_front_attachment_id, 
+    id_card_back_attachment_id, enterprise_id, face_verify_score, status, identity_info_status, 
+    three_factor_verify_status, four_factor_verify_status, living_verify_status, created_at, 
+    updated_at
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_user_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_user_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="org.nounsys.nounservice.datasource.account.entity.UserInfo">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_user_info (user_id, real_name, id_card, 
+      bank_card, reserved_mobile, id_card_front_attachment_id, 
+      id_card_back_attachment_id, enterprise_id, face_verify_score, 
+      status, identity_info_status, three_factor_verify_status, 
+      four_factor_verify_status, living_verify_status, 
+      created_at, updated_at)
+    values (#{userId,jdbcType=BIGINT}, #{realName,jdbcType=VARCHAR}, #{idCard,jdbcType=VARCHAR}, 
+      #{bankCard,jdbcType=VARCHAR}, #{reservedMobile,jdbcType=VARCHAR}, #{idCardFrontAttachmentId,jdbcType=VARCHAR}, 
+      #{idCardBackAttachmentId,jdbcType=VARCHAR}, #{enterpriseId,jdbcType=BIGINT}, #{faceVerifyScore,jdbcType=INTEGER}, 
+      #{status,jdbcType=VARCHAR}, #{identityInfoStatus,jdbcType=VARCHAR}, #{threeFactorVerifyStatus,jdbcType=VARCHAR}, 
+      #{fourFactorVerifyStatus,jdbcType=VARCHAR}, #{livingVerifyStatus,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="org.nounsys.nounservice.datasource.account.entity.UserInfo">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_user_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="realName != null">
+        real_name,
+      </if>
+      <if test="idCard != null">
+        id_card,
+      </if>
+      <if test="bankCard != null">
+        bank_card,
+      </if>
+      <if test="reservedMobile != null">
+        reserved_mobile,
+      </if>
+      <if test="idCardFrontAttachmentId != null">
+        id_card_front_attachment_id,
+      </if>
+      <if test="idCardBackAttachmentId != null">
+        id_card_back_attachment_id,
+      </if>
+      <if test="enterpriseId != null">
+        enterprise_id,
+      </if>
+      <if test="faceVerifyScore != null">
+        face_verify_score,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="identityInfoStatus != null">
+        identity_info_status,
+      </if>
+      <if test="threeFactorVerifyStatus != null">
+        three_factor_verify_status,
+      </if>
+      <if test="fourFactorVerifyStatus != null">
+        four_factor_verify_status,
+      </if>
+      <if test="livingVerifyStatus != null">
+        living_verify_status,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="realName != null">
+        #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null">
+        #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="bankCard != null">
+        #{bankCard,jdbcType=VARCHAR},
+      </if>
+      <if test="reservedMobile != null">
+        #{reservedMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="idCardFrontAttachmentId != null">
+        #{idCardFrontAttachmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="idCardBackAttachmentId != null">
+        #{idCardBackAttachmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseId != null">
+        #{enterpriseId,jdbcType=BIGINT},
+      </if>
+      <if test="faceVerifyScore != null">
+        #{faceVerifyScore,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="identityInfoStatus != null">
+        #{identityInfoStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="threeFactorVerifyStatus != null">
+        #{threeFactorVerifyStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="fourFactorVerifyStatus != null">
+        #{fourFactorVerifyStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="livingVerifyStatus != null">
+        #{livingVerifyStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.nounsys.nounservice.datasource.account.entity.UserInfo">
+    update t_user_info
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="realName != null">
+        real_name = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null">
+        id_card = #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="bankCard != null">
+        bank_card = #{bankCard,jdbcType=VARCHAR},
+      </if>
+      <if test="reservedMobile != null">
+        reserved_mobile = #{reservedMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="idCardFrontAttachmentId != null">
+        id_card_front_attachment_id = #{idCardFrontAttachmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="idCardBackAttachmentId != null">
+        id_card_back_attachment_id = #{idCardBackAttachmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="enterpriseId != null">
+        enterprise_id = #{enterpriseId,jdbcType=BIGINT},
+      </if>
+      <if test="faceVerifyScore != null">
+        face_verify_score = #{faceVerifyScore,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="identityInfoStatus != null">
+        identity_info_status = #{identityInfoStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="threeFactorVerifyStatus != null">
+        three_factor_verify_status = #{threeFactorVerifyStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="fourFactorVerifyStatus != null">
+        four_factor_verify_status = #{fourFactorVerifyStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="livingVerifyStatus != null">
+        living_verify_status = #{livingVerifyStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.nounsys.nounservice.datasource.account.entity.UserInfo">
+    update t_user_info
+    set user_id = #{userId,jdbcType=BIGINT},
+      real_name = #{realName,jdbcType=VARCHAR},
+      id_card = #{idCard,jdbcType=VARCHAR},
+      bank_card = #{bankCard,jdbcType=VARCHAR},
+      reserved_mobile = #{reservedMobile,jdbcType=VARCHAR},
+      id_card_front_attachment_id = #{idCardFrontAttachmentId,jdbcType=VARCHAR},
+      id_card_back_attachment_id = #{idCardBackAttachmentId,jdbcType=VARCHAR},
+      enterprise_id = #{enterpriseId,jdbcType=BIGINT},
+      face_verify_score = #{faceVerifyScore,jdbcType=INTEGER},
+      status = #{status,jdbcType=VARCHAR},
+      identity_info_status = #{identityInfoStatus,jdbcType=VARCHAR},
+      three_factor_verify_status = #{threeFactorVerifyStatus,jdbcType=VARCHAR},
+      four_factor_verify_status = #{fourFactorVerifyStatus,jdbcType=VARCHAR},
+      living_verify_status = #{livingVerifyStatus,jdbcType=VARCHAR},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,74 @@
+通用安装插件方法
+    Intellij IDEA
+        1，打开settings | Plugins。
+        2，在右侧搜索框中输入插件名。
+        3a，若已安装过该插件，在搜索框下方将会显示已安装的该插件。
+        3b，若未安装过，点击下方Browse repositories按钮，将会弹出插件市场，自动搜索。在搜索结果中找到并安装之。
+        注意：任何一步都有可能需要稍等片刻让后台处理，此时intellij会出现旋转等待符号，但比较不显眼，需要稍微仔细点看。
+    Eclipse
+        1，菜单栏上点击Help | Eclipse Marketplace，在搜索框中输入插件名，记得点击enter键或go按钮。
+        2，在搜索框下方列表中找到该插件。
+        3a，若已安装，插件条目右下角的按钮将是installed。
+        3b，若未安装，插件条目右下角的按钮将是install，点击之。
+        4，其后步骤略。
+    注意：
+        不同版本的IDE可能稍有差别。
+        确保启用插件。过程略。
+
+checkstyle插件导入配置文件方法
+    Intellij IDEA
+        1，打开settings | other settings | Checkstyle。
+        2，在Configuration File框中点击右侧+号。
+        3，在弹出的对话框中点击browse按钮，在磁盘目录中找到本文件导入之。建议勾选store relative to project location。
+        4，在Configuration File框中勾选刚导入的配置文件前面的复选框，使其变为默认配置。
+        注意：intellij的checkstyle插件对配置文件有缓存，时间似乎是5分钟。
+    Eclipse
+        1，打开preferences | Checkstyle。
+        2，在Global Check Configurations框中点击右侧New按钮。
+        3，在弹出的对话框中选择Type=External Configuration File，然后点击Location后的browse按钮，在磁盘目录中找到本文件导入之。建议勾选Protect Checkstyle configuration file。最后点击OK关闭对话框。
+        4，在Global Check Configurations框中选中刚导入的配置文件，点击右侧set as default按钮，使其变为默认配置。
+        注意：eclipse的checkstyle插件对配置文件没有缓存，外部的改变会直接生效，不需要重新导入。
+
+checkstyle插件使用方法
+    略。
+    附学习文档：
+        http://checkstyle.sourceforge.net/index.html
+        http://checkstyle.sourceforge.net/apidocs/overview-summary.html
+        http://www.blogjava.net/askcuix/archive/2009/02/08/253775.html
+        google版配置文件：
+            https://google.github.io/styleguide/javaguide.html
+            https://github.com/checkstyle/checkstyle/blob/master/src/main/resources/google_checks.xml
+        gradle的checkstyle插件：
+            https://docs.gradle.org/current/userguide/checkstyle_plugin.html
+
+配置文件编辑方法
+    Intellij IDEA
+        插件暂无编辑功能，只能当成普通xml进行手动编辑。
+        手动编辑的方案略。
+    Eclipse
+        checkstyle插件提供图形界面，可以通过它对配置文件进行修改。
+        1，打开preferences | Checkstyle。
+        2，在Global Check Configurations框中双击该配置文件，或选中想要编辑的配置文件，点击右侧Configure按钮。
+        3，在弹出的编辑界面中，左侧框按分组显示了checkstyle所有可配置的检测条目（即模板集），右侧框显示配置文件中已设定的检测条目。
+        4，使用左侧框右下方的add按钮可以增加检测条目；使用右侧框左下角的remove按钮可以移除条目；双击条目或选中条目后点击open按钮可以对其进行修改。
+        条目的具体含义、修改方案可以参考以下地址：
+            checkstyle官方文档： http://checkstyle.sourceforge.net/config.html
+            Bean_Young《详解CheckStyle的检查规则（共138条规则）》： http://blog.csdn.net/yang1982_0907/article/details/18086693
+        5，额外地，每个已设定的条目可以在advanced标签页里写备注（comment）。
+        这些备注将以<metadata name="net.sf.eclipsecs.core.comment" value="备注内容"/>的形式输出到配置文件中。
+        通过name的名字可以看出，这些备注只是checkstyle为eclipse写的插件使用，在真正运行时不起作用。
+        6，注意！！！当点击编辑界面的ok按钮时，若有改动，则checkstyle插件会自动导出并覆盖旧版，没有任何提示。
+        7，由于导出的格式是固定的，考虑每次导出之后，使用其他文本编辑工具将下面这段注释加在配置文件开头处：
+<!--
+  本文件是checkstyle的配置文件。基于google使用的checkstyle配置文件修改，参见
+  https://google.github.io/styleguide/javaguide.html,
+  https://github.com/checkstyle/checkstyle/blob/master/src/main/resources/google_checks.xml
+  使用eclipse的checkstyle插件修改，参见http://eclipse-cs.sf.net/。
+
+  Author: xiaohui.huang@dianrong.com
+
+  默认的级别是error，
+    1. 当出现error时，代码是不能提交的；必须立即修复后才可以提交；
+    2. 当出现warning时，也需要修复，如果是一些特殊情况，可以暂时不修复；
+    3. 当出现info时，可以忽略该提示。
+-->

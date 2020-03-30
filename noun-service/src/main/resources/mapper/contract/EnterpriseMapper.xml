@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.nounsys.nounservice.datasource.account.mapper.EnterpriseMapper">
+  <resultMap id="BaseResultMap" type="org.nounsys.nounservice.datasource.account.entity.Enterprise">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="full_name" jdbcType="VARCHAR" property="fullName" />
+    <result column="licence_code" jdbcType="VARCHAR" property="licenceCode" />
+    <result column="business_licence_attachment_id" jdbcType="VARCHAR" property="businessLicenceAttachmentId" />
+    <result column="corp_name" jdbcType="VARCHAR" property="corpName" />
+    <result column="corp_mobile" jdbcType="VARCHAR" property="corpMobile" />
+    <result column="corp_licence_type" jdbcType="VARCHAR" property="corpLicenceType" />
+    <result column="corp_licence_code" jdbcType="VARCHAR" property="corpLicenceCode" />
+    <result column="corp_licence_front_attachment_id" jdbcType="VARCHAR" property="corpLicenceFrontAttachmentId" />
+    <result column="corp_licence_back_attachment_id" jdbcType="VARCHAR" property="corpLicenceBackAttachmentId" />
+    <result column="warrant_attachment_id" jdbcType="VARCHAR" property="warrantAttachmentId" />
+    <result column="bank_account_code" jdbcType="VARCHAR" property="bankAccountCode" />
+    <result column="bank_acronym" jdbcType="VARCHAR" property="bankAcronym" />
+    <result column="bank_province" jdbcType="VARCHAR" property="bankProvince" />
+    <result column="bank_city" jdbcType="VARCHAR" property="bankCity" />
+    <result column="bank_branch_name" jdbcType="VARCHAR" property="bankBranchName" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, full_name, licence_code, business_licence_attachment_id, corp_name, corp_mobile, 
+    corp_licence_type, corp_licence_code, corp_licence_front_attachment_id, corp_licence_back_attachment_id, 
+    warrant_attachment_id, bank_account_code, bank_acronym, bank_province, bank_city, 
+    bank_branch_name, status, created_at, updated_at, type
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_enterprise
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_enterprise
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="org.nounsys.nounservice.datasource.account.entity.Enterprise">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_enterprise (full_name, licence_code, business_licence_attachment_id, 
+      corp_name, corp_mobile, corp_licence_type, 
+      corp_licence_code, corp_licence_front_attachment_id, 
+      corp_licence_back_attachment_id, warrant_attachment_id, 
+      bank_account_code, bank_acronym, bank_province, 
+      bank_city, bank_branch_name, status, 
+      created_at, updated_at, type
+      )
+    values (#{fullName,jdbcType=VARCHAR}, #{licenceCode,jdbcType=VARCHAR}, #{businessLicenceAttachmentId,jdbcType=VARCHAR}, 
+      #{corpName,jdbcType=VARCHAR}, #{corpMobile,jdbcType=VARCHAR}, #{corpLicenceType,jdbcType=VARCHAR}, 
+      #{corpLicenceCode,jdbcType=VARCHAR}, #{corpLicenceFrontAttachmentId,jdbcType=VARCHAR}, 
+      #{corpLicenceBackAttachmentId,jdbcType=VARCHAR}, #{warrantAttachmentId,jdbcType=VARCHAR}, 
+      #{bankAccountCode,jdbcType=VARCHAR}, #{bankAcronym,jdbcType=VARCHAR}, #{bankProvince,jdbcType=VARCHAR}, 
+      #{bankCity,jdbcType=VARCHAR}, #{bankBranchName,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}, #{type,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="org.nounsys.nounservice.datasource.account.entity.Enterprise">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_enterprise
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fullName != null">
+        full_name,
+      </if>
+      <if test="licenceCode != null">
+        licence_code,
+      </if>
+      <if test="businessLicenceAttachmentId != null">
+        business_licence_attachment_id,
+      </if>
+      <if test="corpName != null">
+        corp_name,
+      </if>
+      <if test="corpMobile != null">
+        corp_mobile,
+      </if>
+      <if test="corpLicenceType != null">
+        corp_licence_type,
+      </if>
+      <if test="corpLicenceCode != null">
+        corp_licence_code,
+      </if>
+      <if test="corpLicenceFrontAttachmentId != null">
+        corp_licence_front_attachment_id,
+      </if>
+      <if test="corpLicenceBackAttachmentId != null">
+        corp_licence_back_attachment_id,
+      </if>
+      <if test="warrantAttachmentId != null">
+        warrant_attachment_id,
+      </if>
+      <if test="bankAccountCode != null">
+        bank_account_code,
+      </if>
+      <if test="bankAcronym != null">
+        bank_acronym,
+      </if>
+      <if test="bankProvince != null">
+        bank_province,
+      </if>
+      <if test="bankCity != null">
+        bank_city,
+      </if>
+      <if test="bankBranchName != null">
+        bank_branch_name,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="createdAt != null">
+        created_at,
+      </if>
+      <if test="updatedAt != null">
+        updated_at,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fullName != null">
+        #{fullName,jdbcType=VARCHAR},
+      </if>
+      <if test="licenceCode != null">
+        #{licenceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="businessLicenceAttachmentId != null">
+        #{businessLicenceAttachmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="corpName != null">
+        #{corpName,jdbcType=VARCHAR},
+      </if>
+      <if test="corpMobile != null">
+        #{corpMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="corpLicenceType != null">
+        #{corpLicenceType,jdbcType=VARCHAR},
+      </if>
+      <if test="corpLicenceCode != null">
+        #{corpLicenceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="corpLicenceFrontAttachmentId != null">
+        #{corpLicenceFrontAttachmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="corpLicenceBackAttachmentId != null">
+        #{corpLicenceBackAttachmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="warrantAttachmentId != null">
+        #{warrantAttachmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="bankAccountCode != null">
+        #{bankAccountCode,jdbcType=VARCHAR},
+      </if>
+      <if test="bankAcronym != null">
+        #{bankAcronym,jdbcType=VARCHAR},
+      </if>
+      <if test="bankProvince != null">
+        #{bankProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="bankCity != null">
+        #{bankCity,jdbcType=VARCHAR},
+      </if>
+      <if test="bankBranchName != null">
+        #{bankBranchName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.nounsys.nounservice.datasource.account.entity.Enterprise">
+    update t_enterprise
+    <set>
+      <if test="fullName != null">
+        full_name = #{fullName,jdbcType=VARCHAR},
+      </if>
+      <if test="licenceCode != null">
+        licence_code = #{licenceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="businessLicenceAttachmentId != null">
+        business_licence_attachment_id = #{businessLicenceAttachmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="corpName != null">
+        corp_name = #{corpName,jdbcType=VARCHAR},
+      </if>
+      <if test="corpMobile != null">
+        corp_mobile = #{corpMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="corpLicenceType != null">
+        corp_licence_type = #{corpLicenceType,jdbcType=VARCHAR},
+      </if>
+      <if test="corpLicenceCode != null">
+        corp_licence_code = #{corpLicenceCode,jdbcType=VARCHAR},
+      </if>
+      <if test="corpLicenceFrontAttachmentId != null">
+        corp_licence_front_attachment_id = #{corpLicenceFrontAttachmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="corpLicenceBackAttachmentId != null">
+        corp_licence_back_attachment_id = #{corpLicenceBackAttachmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="warrantAttachmentId != null">
+        warrant_attachment_id = #{warrantAttachmentId,jdbcType=VARCHAR},
+      </if>
+      <if test="bankAccountCode != null">
+        bank_account_code = #{bankAccountCode,jdbcType=VARCHAR},
+      </if>
+      <if test="bankAcronym != null">
+        bank_acronym = #{bankAcronym,jdbcType=VARCHAR},
+      </if>
+      <if test="bankProvince != null">
+        bank_province = #{bankProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="bankCity != null">
+        bank_city = #{bankCity,jdbcType=VARCHAR},
+      </if>
+      <if test="bankBranchName != null">
+        bank_branch_name = #{bankBranchName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createdAt != null">
+        created_at = #{createdAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedAt != null">
+        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.nounsys.nounservice.datasource.account.entity.Enterprise">
+    update t_enterprise
+    set full_name = #{fullName,jdbcType=VARCHAR},
+      licence_code = #{licenceCode,jdbcType=VARCHAR},
+      business_licence_attachment_id = #{businessLicenceAttachmentId,jdbcType=VARCHAR},
+      corp_name = #{corpName,jdbcType=VARCHAR},
+      corp_mobile = #{corpMobile,jdbcType=VARCHAR},
+      corp_licence_type = #{corpLicenceType,jdbcType=VARCHAR},
+      corp_licence_code = #{corpLicenceCode,jdbcType=VARCHAR},
+      corp_licence_front_attachment_id = #{corpLicenceFrontAttachmentId,jdbcType=VARCHAR},
+      corp_licence_back_attachment_id = #{corpLicenceBackAttachmentId,jdbcType=VARCHAR},
+      warrant_attachment_id = #{warrantAttachmentId,jdbcType=VARCHAR},
+      bank_account_code = #{bankAccountCode,jdbcType=VARCHAR},
+      bank_acronym = #{bankAcronym,jdbcType=VARCHAR},
+      bank_province = #{bankProvince,jdbcType=VARCHAR},
+      bank_city = #{bankCity,jdbcType=VARCHAR},
+      bank_branch_name = #{bankBranchName,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      created_at = #{createdAt,jdbcType=TIMESTAMP},
+      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+      type = #{type,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

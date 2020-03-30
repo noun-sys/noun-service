@@ -1,0 +1,11 @@
+IntelliJ IDEA
+1，打开 菜单栏-File-Settings
+2，进入 Editor | Code Style ，点击右侧Manage按钮，在弹出框中点击Import按钮，选择“IntelliJ IDEA code style XML”，选择导入本目录下intellij-java-mainapp-style.xml
+
+Eclipse
+Eclipse需要使用三个配置文件：cleanup、formatter、importorder。
+1，打开 菜单栏-Window-Preferences
+2，进入 Java | Code Style | Clean Up，点击Import按钮，选择导入本目录下eclipse-java-mainapp-cleanup.xml。
+3，进入 Java | Code Style | Formatter，点击Import按钮，选择导入本目录下eclipse-java-mainapp-formatter.xml。
+4，进入 Java | Code Style | Organize Imports，点击Import按钮，选择导入本目录下eclipse-java-mainapp.importorder。
+另外建议同时修改save actions，将其各项改成跟cleanup一致即可（无法导出，只能自己修改）。
